@@ -1,18 +1,43 @@
-# Maintainer: sineptic <sineptic0@gmail.com>
-pkgsubn=vimium
-pkgname=chromium-vimium
-pkgver=2.1.2
+pkgname=vfstool-git
+pkgver=0.1.3.r2.g471b6b3
 pkgrel=1
-pkgdesc="Browser extension that provides keyboard-based navigation (unpacked)"
-arch=('any')
-url="https://github.com/philc/vimium"
-license=('MIT')
-source=("$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+pkgdesc='Application for OpenMW modlists designed to make ESP files which adjust the lighting values from all mods listed in openmw.cfg'
+url='https://github.com/magicaldave/vfstool'
+license=('GPL')
+makedepends=('git' 'cargo')
+provides=(vfstool)
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+source=('git+https://github.com/magicaldave/vfstool')
+sha1sums=('SKIP')
+
+pkgver() {
+	cd "${srcdir}/vfstool"
+	_tag="$(git describe --tags $(git rev-list --tags --max-count=1))"
+	_numcommits="$(git rev-list  $(git rev-list --tags --no-walk --max-count=1)..HEAD --count)"
+	_hash="$(git rev-parse --short HEAD)"
+	printf "%s.r%s.g%s" "${_tag:1}" "$_numcommits" "$_hash"
+}
+
+prepare() {
+	cd "${srcdir}/vfstool"
+	export RUSTUP_TOOLCHAIN=stable
+	cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+	cd "${srcdir}/vfstool"
+	export RUSTUP_TOOLCHAIN=stable
+	export CARGO_TARGET_DIR=target
+	cargo build --frozen --release --all-features
+}
+
+check() {
+	cd "${srcdir}/vfstool"
+	export RUSTUP_TOOLCHAIN=stable
+	cargo test --frozen --all-features
+}
 
 package() {
-    mkdir -p "$pkgdir/usr/share/"
-
-    cd "$pkgsubn-$pkgver"
-    cp -r --no-preserve=ownership . "$pkgdir/usr/share/$pkgname-$pkgver"
+	cd "${srcdir}/vfstool"
+	install -Dm0755 -t "$pkgdir/usr/bin/" "target/release/vfstool"
 }
