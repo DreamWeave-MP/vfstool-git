@@ -1,5 +1,5 @@
 pkgname=vfstool-git
-pkgver=0.1.3.r2.g471b6b3
+pkgver=0.1.7
 pkgrel=1
 pkgdesc='Application for OpenMW modlists designed to make ESP files which adjust the lighting values from all mods listed in openmw.cfg'
 url='https://github.com/magicaldave/vfstool'
