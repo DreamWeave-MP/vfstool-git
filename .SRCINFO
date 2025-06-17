@@ -1,6 +1,6 @@
 pkgbase = vfstool-git
 pkgdesc = Application for OpenMW modlists designed to allow introspecting into and creating virtual filesystems, even for other games.
-pkgver = 0.1.5.r2.gaec2622
+pkgver = 0.1.8.r2.gaec2622
 pkgrel = 1
 url = https://github.com/magicaldave/vfstool
 arch = i686
