@@ -28,6 +28,7 @@ build() {
 	cd "${srcdir}/vfstool"
 	export RUSTUP_TOOLCHAIN=stable
 	export CARGO_TARGET_DIR=target
+	export RUSTFLAGS+=" -C link-arg=-llz4 "
 	cargo build --frozen --release --all-features
 }
 
