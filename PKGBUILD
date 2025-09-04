@@ -40,4 +40,5 @@ check() {
 package() {
 	cd "${srcdir}/vfstool"
 	install -Dm0755 -t "$pkgdir/usr/bin/" "target/release/vfstool"
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
