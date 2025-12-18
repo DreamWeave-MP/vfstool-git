@@ -35,7 +35,8 @@ build() {
 check() {
 	cd "${srcdir}/vfstool"
 	export RUSTUP_TOOLCHAIN=stable
-	cargo test --frozen --all-features
+	export RUSTFLAGS+=" -C link-arg=-llz4 "
+	cargo test --frozen --release --all-features
 }
 
 package() {
