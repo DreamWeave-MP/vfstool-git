@@ -2,12 +2,12 @@ pkgname=vfstool-git
 pkgver=2.5.r2.gad0a7c3
 pkgrel=1
 pkgdesc='Application for OpenMW modlists designed to make ESP files which adjust the lighting values from all mods listed in openmw.cfg'
-url='https://github.com/magicaldave/vfstool'
+url='https://github.com/DreamWeave-MP/vfstool'
 license=('GPL')
 makedepends=('git' 'cargo')
 provides=(vfstool)
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
-source=('git+https://github.com/magicaldave/vfstool')
+source=('git+https://github.com/DreamWeave-MP/vfstool')
 sha1sums=('SKIP')
 
 pkgver() {
